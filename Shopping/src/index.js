@@ -33,11 +33,13 @@ const startServer = async() => {
     })
     .then(() => {
         console.log('DB connected');
+        //getCollection('cartmodels').dropIndexes()
     })
     .catch((err) => {
         console.log(`DB not connected - ${err}`);
     });    
 
+    
     
     //API
     shoppingApi(app);

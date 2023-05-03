@@ -2,27 +2,21 @@ import mongoose from 'mongoose';
 
 const productSchema = new mongoose.Schema(
     {
+        _id: {
+            type: mongoose.Schema.Types.ObjectId
+        },
         product_name: {
             type: String,
             required: true
         },
         price: {
             type: Number,
-            required: true,
-            default:'Ksh _'
-        },
-        description: {
-            type: String,
             default:''
         },
-        unit: {
+        quantity: {
             type: Number,
             default:''
         },
-        available: {
-            type: Boolean,
-            default:'true'
-        }
     }
 );
 
