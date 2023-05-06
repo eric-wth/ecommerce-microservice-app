@@ -1,8 +1,11 @@
 import * as cart from '../controllers/cart_controllers.js';
-import * as order from '../controllers/cart_controllers.js';
+import { subscribeMessage } from '../utils/pubSub.js';
 
-export const shoppingApi = (app) => {
-    //CART API
+export const shoppingApi = (app, channel) => {
+    subscribeMessage(channel, 'SHOPPING_SERVICE');
+
+
+
     app.get('/cart', cart.getCart);
 
     app.post('/cart', cart.addToCart);
@@ -10,10 +13,4 @@ export const shoppingApi = (app) => {
 
 
 
-
-
-
-
-    //ORDER API
-    //app.post('/order', order.createOrder);
 };

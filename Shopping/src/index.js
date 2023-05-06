@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import { shoppingApi } from './api/shopping_api.js';
+import { createChannel } from './utils/pubSub.js';
 
 dotenv.config();
 
@@ -37,12 +38,15 @@ const startServer = async() => {
     })
     .catch((err) => {
         console.log(`DB not connected - ${err}`);
-    });    
+    }); 
+    
+    //MESSAGE BROKER CHANNEL
+    const channel = await createChannel();
 
     
     
     //API
-    shoppingApi(app);
+    shoppingApi(app, channel);
 
 };
 startServer();

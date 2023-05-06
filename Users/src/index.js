@@ -3,7 +3,8 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import { userApi } from './api/user_api';
+import { userApi } from './api/user_api.js';
+import { createChannel } from './utils/pubSub.js';
 
 dotenv.config();
 
@@ -38,8 +39,12 @@ const startServer = async() => {
     });
 
 
+    //MESSAGE BROKER CHANNEL
+    const channel = await createChannel();
+
+
     //API
-    userApi(app);
+    userApi(app, channel);
 
 
 };

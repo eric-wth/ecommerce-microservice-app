@@ -25,10 +25,10 @@ export const addToCart = async(req, res) => {
         if(cart) {
             cart.items.push(
                 {
-                    productId,
-                    quantity,
-                    price,
-                    total
+                    productId: productId,
+                    quantity: quantity,
+                    price: price,
+                    total: total
                 }
             );
 
@@ -74,3 +74,22 @@ export const removeCartItem = async(req, res) => {
         throw err;
     };
 };
+
+
+//Subscribe to events
+export const SubscribeEvent = (payload) => {
+    const result = JSON.parse(payload);
+    const { event, data } = result;
+    const { product_name, price, description } = data;
+
+    switch(event) {
+        case 'CREATE_PRODUCT':
+            addProduct({ product_name, price, description });
+            break;
+        default:
+            break;
+    };
+};
+
+
+
